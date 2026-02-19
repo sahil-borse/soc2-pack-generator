@@ -19,8 +19,10 @@ def _decode_token(token: str) -> str:
         if not user_id:
             unauthorized()
         return user_id
-    except Exception:
-        unauthorized()
+    except Exception as e:
+        print("JWT DECODE ERROR:", repr(e))
+        unauthorized("Unauthorized: invalid token")
+
 
 
 def get_current_user_id(credentials: HTTPAuthorizationCredentials = Depends(security)) -> str:

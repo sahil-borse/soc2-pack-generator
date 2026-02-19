@@ -1,0 +1,174 @@
+<div class="min-h-screen bg-gray-50">
+  <div class="max-w-5xl mx-auto p-6">
+    <div class="flex items-center justify-between">
+      <div>
+        <h1 class="text-2xl font-bold">Company Profile</h1>
+        <p class="text-gray-600 mt-1 text-sm">
+          This data is used to generate SOC2-ready policies.
+        </p>
+      </div>
+
+      <a
+        routerLink="/dashboard"
+        class="rounded-xl border px-4 py-2 bg-white hover:bg-gray-100"
+      >
+        Back
+      </a>
+    </div>
+
+    @if (loading()) {
+      <div class="mt-6 bg-white rounded-2xl shadow p-6">Loading...</div>
+    } @else {
+      <div class="mt-6 bg-white rounded-2xl shadow p-6">
+        <form [formGroup]="form" (ngSubmit)="save()" class="space-y-8">
+
+          <!-- Company -->
+          <div>
+            <h2 class="text-lg font-semibold">Company</h2>
+
+            <div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label class="text-sm font-medium">Legal Name</label>
+                <input
+                  formControlName="legalName"
+                  class="mt-1 w-full rounded-xl border px-3 py-2"
+                  placeholder="ABC Pvt Ltd"
+                />
+              </div>
+
+              <div>
+                <label class="text-sm font-medium">Industry</label>
+                <input
+                  formControlName="industry"
+                  class="mt-1 w-full rounded-xl border px-3 py-2"
+                  placeholder="SaaS"
+                />
+              </div>
+
+              <div>
+                <label class="text-sm font-medium">Headcount</label>
+                <input
+                  formControlName="headcount"
+                  type="number"
+                  class="mt-1 w-full rounded-xl border px-3 py-2"
+                />
+              </div>
+
+              <div>
+                <label class="text-sm font-medium">Remote Work</label>
+                <select
+                  formControlName="remoteWork"
+                  class="mt-1 w-full rounded-xl border px-3 py-2"
+                >
+                  <option>Remote</option>
+                  <option>Hybrid</option>
+                  <option>Onsite</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- IT Environment -->
+          <div>
+            <h2 class="text-lg font-semibold">IT Environment</h2>
+
+            <div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label class="text-sm font-medium">Cloud Provider</label>
+                <input formControlName="cloudProvider" class="mt-1 w-full rounded-xl border px-3 py-2" />
+              </div>
+
+              <div>
+                <label class="text-sm font-medium">Source Control</label>
+                <input formControlName="sourceControl" class="mt-1 w-full rounded-xl border px-3 py-2" />
+              </div>
+
+              <div>
+                <label class="text-sm font-medium">CI/CD</label>
+                <input formControlName="ciCd" class="mt-1 w-full rounded-xl border px-3 py-2" />
+              </div>
+
+              <div>
+                <label class="text-sm font-medium">Ticketing Tool</label>
+                <input formControlName="ticketingTool" class="mt-1 w-full rounded-xl border px-3 py-2" />
+              </div>
+
+              <div>
+                <label class="text-sm font-medium">Documentation Tool</label>
+                <input formControlName="documentationTool" class="mt-1 w-full rounded-xl border px-3 py-2" />
+              </div>
+
+              <div>
+                <label class="text-sm font-medium">Chat Tool</label>
+                <input formControlName="chatTool" class="mt-1 w-full rounded-xl border px-3 py-2" />
+              </div>
+            </div>
+          </div>
+
+          <!-- Identity & Access -->
+          <div>
+            <h2 class="text-lg font-semibold">Identity & Access</h2>
+
+            <div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div class="flex items-center gap-3">
+                <input type="checkbox" formControlName="ssoUsed" class="h-4 w-4" />
+                <label class="text-sm font-medium">SSO Used</label>
+              </div>
+
+              <div>
+                <label class="text-sm font-medium">SSO Provider</label>
+                <input formControlName="ssoProvider" class="mt-1 w-full rounded-xl border px-3 py-2" />
+              </div>
+
+              <div class="flex items-center gap-3">
+                <input type="checkbox" formControlName="mfaEnforcedForAllUsers" class="h-4 w-4" />
+                <label class="text-sm font-medium">MFA enforced for all users</label>
+              </div>
+
+              <div>
+                <label class="text-sm font-medium">Access Review Frequency</label>
+                <select
+                  formControlName="accessReviewFrequency"
+                  class="mt-1 w-full rounded-xl border px-3 py-2"
+                >
+                  <option>Monthly</option>
+                  <option>Quarterly</option>
+                  <option>Yearly</option>
+                </select>
+              </div>
+
+              <div>
+                <label class="text-sm font-medium">Offboarding timeline (hours)</label>
+                <input
+                  type="number"
+                  formControlName="offboardingTimelineHours"
+                  class="mt-1 w-full rounded-xl border px-3 py-2"
+                />
+              </div>
+            </div>
+          </div>
+
+          @if (error) {
+            <div class="text-sm text-red-600 bg-red-50 border border-red-200 p-3 rounded-xl">
+              {{ error }}
+            </div>
+          }
+
+          @if (message) {
+            <div class="text-sm text-green-700 bg-green-50 border border-green-200 p-3 rounded-xl">
+              {{ message }}
+            </div>
+          }
+
+          <button
+            type="submit"
+            [disabled]="saving"
+            class="rounded-xl bg-black text-white px-6 py-2 font-semibold disabled:opacity-50"
+          >
+            {{ saving ? 'Saving...' : 'Save Profile' }}
+          </button>
+        </form>
+      </div>
+    }
+  </div>
+</div>

@@ -8,6 +8,8 @@ from .routes.auth_routes import router as auth_router
 from .routes.company_profile_routes import router as company_profile_router
 from .routes.document_routes import router as document_router
 from .routes.export_routes import router as export_router
+from app.routes.policy_pack_routes import router as policy_pack_router
+
 
 app = FastAPI(title=settings.API_NAME, version=settings.API_VERSION)
 
@@ -33,3 +35,4 @@ app.include_router(auth_router)
 app.include_router(company_profile_router)
 app.include_router(document_router)
 app.include_router(export_router)
+app.include_router(policy_pack_router)

@@ -1,0 +1,50 @@
+<div class="min-h-screen bg-gray-50 flex items-center justify-center p-4">
+  <div class="w-full max-w-md bg-white rounded-2xl shadow p-6">
+    <div class="mb-6">
+      <h1 class="text-2xl font-bold">Create account</h1>
+      <p class="text-gray-600 mt-1">Generate SOC2-ready policies in minutes.</p>
+    </div>
+
+    <form (ngSubmit)="submit()" [formGroup]="form" class="space-y-4">
+      <div>
+        <label class="text-sm font-medium">Email</label>
+        <input
+          formControlName="email"
+          type="email"
+          class="mt-1 w-full rounded-xl border px-3 py-2 focus:outline-none focus:ring-2 focus:ring-black"
+          placeholder="you@company.com"
+        />
+      </div>
+
+      <div>
+        <label class="text-sm font-medium">Password</label>
+        <input
+          formControlName="password"
+          type="password"
+          class="mt-1 w-full rounded-xl border px-3 py-2 focus:outline-none focus:ring-2 focus:ring-black"
+          placeholder="Min 8 chars"
+        />
+        <p class="text-xs text-gray-500 mt-1">Max 72 characters (bcrypt limit).</p>
+      </div>
+
+      @if (error) {
+        <div class="text-sm text-red-600 bg-red-50 border border-red-200 p-3 rounded-xl">
+          {{ error }}
+        </div>
+      }
+
+      <button
+        type="submit"
+        [disabled]="loading"
+        class="w-full rounded-xl bg-black text-white py-2 font-semibold disabled:opacity-50"
+      >
+        {{ loading ? 'Creating...' : 'Create account' }}
+      </button>
+    </form>
+
+    <div class="mt-5 text-sm text-gray-700">
+      Already have an account?
+      <a routerLink="/login" class="font-semibold underline">Login</a>
+    </div>
+  </div>
+</div>

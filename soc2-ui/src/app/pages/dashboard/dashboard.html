@@ -1,0 +1,28 @@
+<div class="min-h-screen bg-gray-50">
+  <div class="max-w-5xl mx-auto p-6">
+    <div class="flex items-center justify-between">
+      <h1 class="text-2xl font-bold">SOC2 Policy Pack</h1>
+
+      <button (click)="logout()" class="rounded-xl border px-4 py-2 bg-white hover:bg-gray-100">
+        Logout
+      </button>
+    </div>
+
+    <div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4">
+      <a routerLink="/company-profile" class="block rounded-2xl bg-white shadow p-5 hover:shadow-md transition">
+        <div class="text-lg font-semibold">Company Profile</div>
+        <div class="text-gray-600 mt-1 text-sm">
+          Fill your SOC2 questionnaire (used to generate policies).
+        </div>
+      </a>
+
+      <a routerLink="/documents" class="block rounded-2xl bg-white shadow p-5 hover:shadow-md transition">
+        <div class="text-lg font-semibold">Documents</div>
+        <div class="text-gray-600 mt-1 text-sm">
+          Generate and download your SOC2 policy pack.
+        </div>
+      </a>
+
+    </div>
+  </div>
+</div>

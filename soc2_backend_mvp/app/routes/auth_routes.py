@@ -14,3 +14,10 @@ async def register(payload: UserCreate):
 @router.post("/login")
 async def login(payload: UserLogin):
     return await login_user(payload.email, payload.password)
+
+from fastapi import Depends
+from ..services.document_service import get_current_user_id
+
+@router.get("/me")
+async def me(user_id: str = Depends(get_current_user_id)):
+    return {"userId": user_id}
