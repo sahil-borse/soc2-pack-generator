@@ -1,0 +1,36 @@
+<div class="min-h-screen flex items-center justify-center bg-gray-50">
+  <div class="bg-white rounded-2xl shadow p-8 w-full max-w-md">
+
+    <h2 class="text-xl font-bold mb-6 text-center">
+      Create Your Company
+    </h2>
+
+    <form [formGroup]="form" (ngSubmit)="submit()" class="space-y-4">
+
+      <div>
+        <label class="text-sm font-medium">Company Name</label>
+        <input
+          formControlName="name"
+          class="mt-1 w-full rounded-xl border px-3 py-2"
+          placeholder="Acme Technologies Pvt Ltd"
+        />
+      </div>
+
+      @if (error) {
+        <div class="text-sm text-red-600 bg-red-50 border border-red-200 p-3 rounded-xl">
+          {{ error }}
+        </div>
+      }
+
+      <button
+        type="submit"
+        [disabled]="loading"
+        class="w-full rounded-xl bg-black text-white px-4 py-2 font-semibold disabled:opacity-50"
+      >
+        {{ loading ? 'Creating...' : 'Create Company' }}
+      </button>
+
+    </form>
+
+  </div>
+</div>

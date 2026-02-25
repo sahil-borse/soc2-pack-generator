@@ -1,0 +1,54 @@
+<div class="flex gap-6 overflow-x-auto p-6 bg-gray-50 min-h-screen">
+
+  @for (col of columns(); track col.key) {
+
+    <div class="bg-white rounded-xl shadow p-4 w-80 flex-shrink-0">
+
+      <h3 class="font-semibold mb-4">
+        {{ col.label }}
+      </h3>
+
+      <div
+        cdkDropList
+        [cdkDropListData]="grouped()[col.key]"
+        class="space-y-3 min-h-[200px]"
+        (cdkDropListDropped)="drop($event, col.key)"
+      >
+
+        @for (control of grouped()[col.key]; track control.id) {
+
+          <div
+            cdkDrag
+            class="bg-gray-100 p-3 rounded-lg shadow-sm cursor-move"
+          >
+            <div class="font-medium">
+              {{ control.controlCode }}
+            </div>
+
+            <div class="text-sm text-gray-600">
+              {{ control.title }}
+            </div>
+
+            <select
+              class="mt-2 text-sm border rounded px-2 py-1"
+              [value]="control.status"
+              (change)="changeStatus(control, $any($event.target).value)"
+            >
+              @for (option of columns(); track option.key) {
+                <option [value]="option.key">
+                  {{ option.label }}
+                </option>
+              }
+            </select>
+
+          </div>
+
+        }
+
+      </div>
+
+    </div>
+
+  }
+
+</div>

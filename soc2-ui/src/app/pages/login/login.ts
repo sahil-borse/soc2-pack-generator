@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../core/services/auth.service';
+import { CompanyService } from '../../core/services/company.service'
 
 @Component({
   selector: 'app-login',
@@ -19,6 +20,7 @@ export class LoginComponent {
   constructor(
     private fb: FormBuilder,
     private auth: AuthService,
+    private companyService: CompanyService,
     private router: Router
   ) {
     this.form = this.fb.group({
@@ -48,6 +50,19 @@ export class LoginComponent {
       next: () => {
         this.loading = false;
         this.router.navigate(['/dashboard']);
+
+        this.companyService.getCompanies().subscribe({
+          next: (companies) => {
+            if (companies.length === 1) {
+              localStorage.setItem('companyId', companies[0].id);
+              this.router.navigate(['/dashboard']);
+            } else if (companies.length === 0) {
+              this.router.navigate(['/create-company']);
+            } else {
+              this.router.navigate(['/select-company']);
+            }
+          }
+        });
       },
       error: (err) => {
         this.loading = false;

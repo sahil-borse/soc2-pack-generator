@@ -1,20 +1,36 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { AuthService } from '../../core/services/auth.service';
-
+import { CompanyFrameworkService, CompanyFramework } from '../../core/services/company-framework.service';
 @Component({
   selector: 'app-dashboard',
   standalone: true,
   imports: [CommonModule, RouterModule],
-  templateUrl: './dashboard.html',
-  styleUrl: './dashboard.css',
+  templateUrl: './dashboard.html'
 })
-export class DashboardComponent {
-  constructor(private auth: AuthService) {}
+export class DashboardComponent implements OnInit {
 
-  logout() {
-    this.auth.logout();
-    window.location.href = '/login';
+  frameworks = signal<CompanyFramework[]>([]);
+  loading = signal(true);  
+
+  constructor(private service: CompanyFrameworkService) { }
+
+  ngOnInit() {
+    this.service.getCompanyFrameworks().subscribe({
+      next: (res) => {
+        this.frameworks.set(res);
+      },
+      error: () => {
+        console.error('Failed to load frameworks');
+      }
+    });
+    this.loading.set(false);
   }
+
+  progressColor(score: number) {
+    if (score >= 80) return 'bg-green-500';
+    if (score >= 50) return 'bg-yellow-500';
+    return 'bg-red-500';
+  }
+  
 }

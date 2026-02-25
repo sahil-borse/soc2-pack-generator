@@ -8,5 +8,5 @@ class CompanyProfileUpsert(BaseModel):
 
 class CompanyProfilePublic(BaseModel):
     id: str
-    userId: str
+    companyId: str
     profile: Dict[str, Any]

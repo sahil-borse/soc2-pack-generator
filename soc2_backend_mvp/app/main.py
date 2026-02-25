@@ -9,7 +9,12 @@ from .routes.company_profile_routes import router as company_profile_router
 from .routes.document_routes import router as document_router
 from .routes.export_routes import router as export_router
 from app.routes.policy_pack_routes import router as policy_pack_router
-
+from app.modules.company.routes import router as company_router
+from app.modules.framework.routes import router as framework_router
+from app.modules.control.routes import router as control_router
+from app.modules.company_controls.routes import router as company_control_router
+from app.modules.company_framework.routes import router as company_framework_router
+from app.modules.board_configuration.routes import router as board_config_router
 
 app = FastAPI(title=settings.API_NAME, version=settings.API_VERSION)
 
@@ -36,3 +41,9 @@ app.include_router(company_profile_router)
 app.include_router(document_router)
 app.include_router(export_router)
 app.include_router(policy_pack_router)
+app.include_router(company_router)
+app.include_router(framework_router)
+app.include_router(control_router)
+app.include_router(company_control_router)
+app.include_router(company_framework_router)
+app.include_router(board_config_router)

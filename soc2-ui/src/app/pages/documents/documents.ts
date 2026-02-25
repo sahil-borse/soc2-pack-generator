@@ -1,7 +1,7 @@
 import { Component, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { PolicyPackService } from '../../core/services/policy-pack';
+import { PolicyPackService } from '../../core/services/policy-pack.service';
 
 @Component({
   selector: 'app-documents',

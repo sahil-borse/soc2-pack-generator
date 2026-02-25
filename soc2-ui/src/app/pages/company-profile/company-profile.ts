@@ -2,7 +2,7 @@ import { Component, OnInit, signal  } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { CompanyProfileService } from '../../core/services/company-profile';
+import { CompanyProfileService } from '../../core/services/company-profile.service';
 
 @Component({
   selector: 'app-company-profile',
